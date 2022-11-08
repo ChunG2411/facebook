@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/core/story.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+    <!--========================list user========================-->
+    <div class="list_story">
+        <h2 style="padding-left:1rem;">Lang_story_head</h2>
+
+        <div class="user">
+            <div class="story-user active create" data-id="create">
+                <a href=""><i class="fa-solid fa-plus"></i></a>
+                <p>Lang_story_create</p>
+            </div>
+
+            {% for story in all_story %}
+                {% if story.user == request.user %}
+                    <div class="story-user" data-id="{{story.user.username}}-{{story.id}}">
+                        <div class="profile-picture">
+                            <img src="{{story.user.avatar.url}}">
+                        </div>
+                        <div class="name">
+                            <strong>Lang_story_you</strong><br>
+                            {% if story.create_on.hour < 12 %}
+                                <small>{{story.create_on.hour}} Lang_story_am</small>
+                            {% else %}
+                                <small>{{story.create_on.hour}} Lang_story_pm</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for story in all_story %}
+                {% if story.user != request.user %}
+                    <div class="story-user" data-id="{{story.user.username}}-{{story.id}}">
+                        <div class="profile-picture">
+                            <img src="{{story.user.avatar.url}}">
+                        </div>
+                        <div class="name">
+                            <strong>{{story.user.full_name}}</strong><br>
+                            {% if story.create_on.hour < 12 %}
+                                <small>{{story.create_on.hour}} Lang_story_am</small>
+                            {% else %}
+                                <small>{{story.create_on.hour}} Lang_story_pm</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+    
+    <!--========================Story content========================-->
+    <div class="story_content">
+        <div class="story_card">
+
+            <div class="content" id="create">
+                <form method="POST" action="{% url 'story_create' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="image">Lang_story_upload</label>
+                    <input type="file" id="image" name="image" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" style="display:none;">
+                    <img id="blah" alt="your image" src="{% static 'img/blue.jpg' %}"/>
+                    <img id="background" src="{% static 'img/blue.jpg' %}" style="display:none;overflow: hidden;"/>
+                    <div class="button_form_story">
+                        <button type="submit">Lang_story_submit</button>
+                        <button class="clear" type="reset" id="clear">Lang_story_cancer</button>
+                    </div>
+                    </form>
+            </div>
+
+            {% for story in all_story %}
+                <div class="content" id="{{story.user.username}}-{{story.id}}">
+                    <div class="head">
+                        <div class="profile-picture">
+                            <a href="{% url 'profile' story.user.username %}"><img src="{{story.user.avatar.url}}"></a>
+                        </div>
+                        <p>{{story.user.full_name}}</p>
+
+                        {% if story.user == request.user %}
+                            <form method="POST" action="{% url 'delete_story' story.pk %}">
+                                {% csrf_token %}
+                                <button class="delete" type="submit"><p>Lang_story_delete</p></button>
+                            </form>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="img">
+                        <img src="{{story.image.url}}">
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/components/navbar_story.js' %}"></script>
+    <script src="{% static 'js/core/story.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'style/core/search.css' %}">
+    <link rel="stylesheet" href="{% static 'style/components/post_card.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="search-card">
+
+        {% if search_result_user %}
+            <div class="search-user-card">
+
+                {% for result_user in search_result_user %}
+                    {% if result_user != request.user %}
+                        <div>
+                            <div class="profile-picture">
+                                <a href="{% url 'profile' result_user.username %}"><img src="{{result_user.avatar.url}}"></a>
+                            </div>
+                            <a href="{% url 'profile' result_user.username %}"><strong style="color:black;">{{result_user.full_name}}</strong></a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        {% endif %}
+        
+        {% if search_result_post %}
+            <div class="search-post-card">
+
+                {% for post in search_result_post %}
+                    {% include 'components/post_card.html' %}
+                {% endfor %}
+
+            </div>
+        {% endif %}
+
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/components/navbar_search.js' %}"></script>
+    <script src="{% static 'js/core/search.js' %}"></script>
+{% endblock %}

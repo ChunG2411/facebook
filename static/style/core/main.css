@@ -1,0 +1,342 @@
+/*========================main=======================*/
+main{
+    margin-top: 0.7rem;
+    margin-left: 5rem;
+    display: flex;
+    position: relative;
+}
+
+/*=============suggested=============*/
+.suggested{
+    padding: 0.5rem;
+    width: 20%;
+    max-width: 15rem;
+    height: 100%;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.suggested::-webkit-scrollbar{
+    width: 0.5rem;
+}
+.suggested::-webkit-scrollbar-track{
+    background: transparent !important;
+}
+.suggested::-webkit-scrollbar-thumb{
+    background: rgb(190, 190, 190);
+    border-radius: 0.3rem;
+}
+
+.suggested h2{
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+}
+.suggested h4{
+    margin-bottom: 0.8rem;
+}
+.suggested .content > div{
+    padding: 0.5rem 0 0.5rem 0;
+    margin-bottom: 0.5rem;
+}
+.suggested .content > div:hover{
+    background: rgb(214, 213, 213);
+    border-radius: 0.5rem;
+}
+.suggested .content > div i{
+    color: rgb(100, 99, 99);
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+/*=================feeds==================*/
+.feeds{
+    overflow-y: hidden;
+    width: 100%;
+    margin-left: 22%;
+    margin-right: 20%;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+/*=========stories==========*/
+.feeds .stories{
+    padding: 1rem 0 0.5rem 0;
+    display: flex;
+    position: relative;
+    justify-content: start;
+    height: 15rem;
+    gap: 0.5rem;
+    width: 90%;
+    overflow-y: scroll;
+}
+.feeds .scroll_next_story{
+    position: absolute;
+    right: 0;
+    top: 6rem;
+    color: gray;
+    background: white;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    width: 3rem;    
+    display: none;
+    place-items: center;
+    box-shadow: 0 0 0.2rem gray;
+    cursor: pointer;
+    z-index: 50;
+}
+.feeds .scroll_next_story i{
+    font-size: 2.5rem;
+}
+.feeds .scroll_pre_story{
+    position: absolute;
+    left: 0;
+    top: 6rem;
+    color: gray;
+    background: white;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    width: 3rem;    
+    display: none;
+    place-items: center;
+    box-shadow: 0 0 0.2rem gray;
+    cursor: pointer;
+    z-index: 50;
+}
+.feeds .scroll_pre_story i{
+    font-size: 2.5rem;
+}
+.stories::-webkit-scrollbar{
+    height: 0.2rem;
+    width: 0;
+}
+.stories::-webkit-scrollbar-track{
+    background: transparent !important;
+}
+.stories::-webkit-scrollbar-thumb{
+    background: rgb(207, 207, 207);
+    border-radius: 0.3rem;
+}
+
+.feeds .stories .story{
+    box-shadow: 0 0 0.15rem gray;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: white;
+    min-width: 7.4rem;
+    width: 7.5rem;
+    font-size: 0.8rem;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+}
+.feeds .stories .story .link{
+    position: absolute;
+    background: transparent;
+    z-index: 50;
+    width: 7.5rem;
+    height: 13.5rem;
+    top: 0;
+    cursor: pointer;
+}
+.stories .story .profile-picture{
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 0.2rem solid var(--color-primary);
+    margin-left: 0.8rem;
+    margin-top: 0.8rem;
+}
+.stories .story .name{
+    margin-left: 0.8rem;
+    margin-bottom: 0.5rem;
+    z-index: 2;
+}
+.stories .create::before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3.5rem;
+    background: white;
+    position: absolute;
+    bottom: 0;
+    border-bottom-left-radius: 0.9rem;
+    border-bottom-right-radius: 0.9rem;
+}
+.stories .create i{
+    font-size: 2.2rem;
+    color: var(--color-primary);
+    transform: translateY(350%);
+    background: white;
+    border: 0.2rem solid white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.stories .create .name{
+    margin-left: 0;
+    color: black;
+}
+.feeds .stories .create{
+    align-items: center;
+}
+/*============post==============*/
+.feeds .post{
+    box-shadow: 0 0 0.1rem gray;
+    margin-top: 1rem;
+    width: 80%;
+    padding: 1rem;
+    background: white;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.feeds .post .head{
+    display: flex;
+    margin-left: 0.5rem;
+    align-items: center;
+    gap: 0.7rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid rgb(187, 187, 187);
+}
+.feeds .post .head label{
+    background: rgb(231, 231, 231);
+    padding: 0.5rem;
+    border-radius: 2rem;
+    width: 100%;
+    color: rgb(109, 108, 108);
+    cursor: pointer;
+}
+.feeds .post .action{
+    padding: 0.5rem 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.feeds .post .action > div{
+    padding: 0.8rem;
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    color: rgb(88, 88, 88);
+    font-size: 0.9rem;
+}
+.feeds .post .action i{
+    font-size: 1.3rem;
+}
+.feeds .post .action > div:hover{
+    background: rgb(231, 231, 231);
+    border-radius: 1rem;
+}
+/*========feeds card=========*/
+.feeds_card{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: grid;
+    place-items: center;
+}
+
+/*===============contact==============*/
+main .contact{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: fixed;
+    right: 0;
+    width: 18%;
+    max-width: 15rem;
+    height: max-content;
+}
+.contact::-webkit-scrollbar{
+    width: 0rem;
+}
+.contact h3{
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+.contact .profile .contact-user{
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+.contact .profile .contact-user:hover{
+    background: rgb(216, 216, 216);
+}
+.contact .profile strong{
+    font-size: 0.85rem;
+}
+.contact .profile .contact-user .contact-user-avatar{
+    position: relative;
+}
+.contact .profile .contact-user .contact-user-avatar .status-icon{
+    position: absolute;
+    font-size: 0.7rem;
+    right: 0;
+    bottom: 0;
+    color: gray;
+}
+
+/*======================create-post=======================*/
+.post-create{
+    background: rgba(226, 226, 226, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: grid;
+    place-items: center;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.post-create .card{
+    background: white;
+    width: 35rem;
+    height: max-content;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.2rem rgb(190, 190, 190);
+}
+.post-create .card h3{
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 0.1rem solid rgb(190, 189, 189);
+}
+.post-create .card .post{
+    position: relative;
+    padding: 1rem;
+}
+.post-create .card .post .profile{
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    align-items: center;
+}
+.post-create .card .post .profile .name{
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+.post-create .card .post .content textarea{
+    font-size: 1rem;
+    width: 100%;
+}
+.post-create .card .post .content label{
+    padding: 0.2rem 0.5rem 0.2rem 0.7rem;
+    background: rgb(190, 190, 190);
+    border-radius: 0.5rem;
+}
+.post-create .card .post .content img{
+    margin-top: 1rem;
+    width: 10rem;
+}
+.post-create .card .post .content button[type="submit"]{
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background: var(--color-primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0.3rem;
+}

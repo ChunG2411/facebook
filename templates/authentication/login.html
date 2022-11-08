@@ -1,0 +1,96 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="text">
+        <h2>Lang_login_logo</h2>
+        <p>Lang_login_welcome</p>
+    </div>
+
+    <div class="form">
+        {% csrf_token %}    
+        <form method="POST">
+            <input type="email" id="id_email" name="email" placeholder="Email" required>
+            <input type="password" id="id_password" name="password" placeholder="Password" required>
+            <button type="submit" class="submit" name="login" value="login">Lang_login_submit</button>
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color:red;font-size:90%;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </form>
+        <button class="create">Lang_login_create</button> 
+    </div>
+</div>
+
+<div class="setup_navbar_login">
+    <div class="language">
+        <i class="fas fa-globe"></i>
+        <p id="language">Lang_navbar_pop_lang</p>
+
+        <div class="select_lang">
+            <p class="lang_select" id="english">English</p>
+            <p class="lang_select" id="vietnamese">Vietnamese</p>
+            <p class="lang_select" id="chinese">Chinese</p>
+        </div>
+    </div>
+</div>
+
+<div class="signup">
+    <div class="card">
+        <div class="head">
+            <h1>Lang_logup_head<i class="fa-solid fa-xmark" id="exit-create"></i></h1>
+            <p>Lang_logup_intro</p>
+        </div>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ signup_form.non_field_errors }}
+            </div>
+        {% endif %}
+        <div class="form">
+            {% csrf_token %}
+            <form method="POST">
+                <span>Lang_logup_fullname</span>
+                <input type="text" id="id_full_name" name="full_name" {% if signup_form.full_name.errors %}is-invalid{% endif %} required>
+                <div style="color:red;font-size:90%;">
+                    {{ signup_form.full_name.errors }}
+                </div>
+
+                <span>Lang_logup_email</span>
+                <input type="email" id="id_email" name="email" {% if signup_form.email.errors %}is-invalid{% endif %} required>
+                <div style="color:red;font-size:90%;">
+                    {{ signup_form.email.errors }}
+                </div>
+
+                <span>Lang_logup_username</span>
+                <input type="text" id="id_username" name="username" {% if signup_form.username.errors %}is-invalid{% endif %} required>
+                <div style="color:red;font-size:90%;">
+                    {{ signup_form.username.errors }}
+                </div>
+
+                <span>Lang_logup_pass</span>
+                <input type="password" id="id_password1" name="password1" {% if signup_form.password1.errors %}is-invalid{% endif %} required>
+                <div style="color:red;font-size:90%;">
+                    {{ signup_form.password1.errors }}
+                </div>
+                
+                <span>Lang_logup_repass</span>
+                <input type="password" id="id_password2" name="password2" {% if signup_form.password2.errors %}is-invalid{% endif %} required>
+                <div style="color:red;font-size:90%;">
+                    {{ signup_form.password2.errors }}
+                </div>
+
+                <span>Lang_logup_gender {{ signup_form.gender }}</span>
+                <p>Lang_logup_term</p>
+
+                <button type="submit" class="submit" name="signup" value="signup">Lang_logup_submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/authentication/login.js' %}"></script>
+{% endblock %}

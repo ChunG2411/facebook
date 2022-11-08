@@ -1,0 +1,207 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/core/main.css' %}">
+<link rel="stylesheet" href="{% static 'style/components/post_card.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <!--=====================suggested===================-->
+    <div class="suggested">
+        <h2>Lang_main_logo</h2>
+        <h4>Lang_main_suggest</h4>
+        <div class="content">
+            <div>
+                <i class="fa-solid fa-user-group"></i>
+                <a href="{% url 'friend' %}"><label for="friends" style="color:black;cursor:pointer;">Lang_main_friend</label></a>
+            </div>
+            <div>
+                <i class="fa-brands fa-youtube"></i>
+                <label for="watch">Lang_main_watch</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-users-viewfinder"></i>
+                <label for="group">Lang_main_group</label>
+            </div>
+            <div>
+                <i class="fa-brands fa-facebook-messenger"></i>
+                <label for="messenger">Lang_main_mess</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-gamepad"></i>
+                <label for="game">Lang_main_game</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-store"></i>
+                <label for="market">Lang_main_market</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <label for="memory">Lang_main_save</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-bookmark"></i>
+                <label for="bookmark">Lang_main_mark</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-bullhorn"></i>
+                <label for="ad">Lang_main_ad</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-calendar"></i>
+                <label for="event">Lang_main_event</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-calendar"></i>
+                <label for="event">Lang_main_event</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-star"></i>
+                <label for="favorite">Lang_main_fav</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-camcorder"></i>
+                <label for="live">Lang_main_live</label>
+            </div>
+            <div>
+                <i class="fa-solid fa-file-user"></i>
+                <label for="page">Lang_main_page</label>
+            </div>
+        </div>
+    </div>
+
+    <!--====================feed=====================-->
+    <div class="feeds">
+        <!--===========story==============-->
+        <div class='stories'>
+
+            <div class="story create" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.5)),url({{ request.user.avatar.url }});">
+                <a href="{% url 'story' %}"><i class="fa-solid fa-circle-plus"></i></a>
+                <p class="name">Lang_main_create_story</p>
+            </div>
+            
+            {% for story in all_story %}
+                {% if user == story.user %}
+                    <div class="story" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.5)),url('{{story.image.url}}');">
+                        <div class="profile-picture">
+                            <img src="{{ story.user.avatar.url }}">
+                        </div>
+                        <a href="{% url 'story' %}"><div class="link"></div></a>
+                        <p class="name">Lang_main_you_story</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+                    
+            {% for story in all_story %}
+                {% if user != story.user %}
+                    <div class="story" style="background-image: linear-gradient(transparent, rgba(0,0,0,0.5)),url('{{story.image.url}}');">
+                        <div class="profile-picture">
+                            <img src="{{story.user.avatar.url}}">
+                        </div>
+                        <a href="{% url 'story' %}"><div class="link"></div></a>
+                        <p class="name">{{story.user.full_name}}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <div class="scroll_next_story">
+            <i class="fas fa-caret-right"></i>
+        </div>
+        <div class="scroll_pre_story">
+            <i class="fas fa-caret-left"></i>
+        </div>
+
+        <!--============post================-->
+        <div class="post">
+            <div class="head">
+                <div class="profile-picture">
+                    <img src="{{ user.avatar.url }}">
+                </div>
+                <label for="post-create">Lang_main_ques</label>
+            </div>
+            <div class="action">
+                <div>
+                    <i class="fa-solid fa-video" style="color: rgb(255, 62, 62);"></i>
+                    <p>Lang_main_postlive</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-image" style="color: rgb(2, 168, 71);"></i>
+                    <p>Lang_main_photo_post</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-face-grin" style="color: rgb(235, 199, 43);"></i>
+                    <p>Lang_main_acti_post</p>
+                </div>
+            </div>
+        </div>
+
+        <!--============feed==================-->
+        <div class="feeds_card">
+            {% for post in all_post %}
+                {% include 'components/post_card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!--======================contacts===================-->
+    <div class="contact">
+        <h3>Lang_main_contact</h3>
+        <div class="profile">
+            {% for friend in all_friend.friends.all %}
+            <div class="contact-user" data-id="{{friend.username}}">
+                <div class="contact-user-avatar">
+                    <div class="profile-picture">
+                        <img src="{{friend.avatar.url}}">
+                    </div>
+                    <i id="{{friend.username}}" class="fa-solid fa-circle status-icon"></i>
+                </div>
+                
+                <strong style="color:black;">{{friend.full_name}}</strong>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+<!--=========================create-post========================-->
+<div class="post-create" id="post-create">
+    <div class="card">
+        <h3>Lang_main_create_post</h3>
+        <div class="post">
+            <form method="POST" id="create_post_form" action="{% url 'post_create' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="profile">
+                    <div class="profile-picture">
+                        <img src="{{user.avatar.url}}">
+                    </div>
+                    <div class="name">
+                        <p>{{user.full_name}}</p>
+                        <div class="status">{{form.status}}</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <textarea id="text" name="caption" placeholder="What's on our mind?" rows="4" required></textarea>
+
+                    <label id="input_photo" for="image">Lang_main_post_add</label>
+                    <label id="clear">Lang_main_post_remove</label>
+
+                    <input id="image" name="image" type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" style="display:none;"><br>
+                    <img id="blah" alt="your image" src="{% static 'img/blue1.jpg' %}" style="display:none"/>
+                    <img id="background" src="{% static 'img/blue1.jpg' %}" style="display:none"/>
+
+                    <button type="submit" class="btn btn-primary">Lang_main_post_submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/core/main.js' %}"></script>
+    <script src="{% static 'js/components/navbar.js' %}"></script>
+{% endblock %}

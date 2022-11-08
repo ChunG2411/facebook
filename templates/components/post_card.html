@@ -1,0 +1,113 @@
+    <div class="feed">
+        <div class="head">
+            <div class="user">
+                <div class="profile-picture">
+                    <a href="{% url 'profile' post.user.username %}"><img src="{{post.user.avatar.url}}"></a>
+                </div>
+                <div class="name">
+                    <h3>{{post.user.full_name}}</h3>
+                    <small>{{post.create_on}} <i class="fa-solid fa-earth-americas"></i></small>       
+                </div>
+            </div>
+            <div class="edit">
+                <i class="fa-solid fa-ellipsis"></i>
+            </div>
+        </div>
+        
+        <div class="caption">
+            <p style="white-space: pre-line">{{post.caption}}</p>
+        </div>
+
+        {% if post.image %}
+            <div class="feed-photo">
+                <img src="{{post.image.url}}">
+            </div>
+        {% endif %}
+
+        <div class="action-button">
+            <div class="interactive">
+
+                <div class="like_count" id="{{post.pk}}">
+                    <span><i class="fa-solid fa-thumbs-up"></i></span>
+                    <span class="post_like_count" id="{{post.pk}}">{{post.like_count}}</span>
+                </div>
+
+                <div class="cmt_count">
+                    <span class="post_cmt_count" id="{{post.pk}}">{{post.comment_count}} Lang_post_cmt_cnt</span>
+                </div>
+            </div>
+
+            <div class="button">
+                <div>
+                    {% if post.pk in liked %}                            
+                        <button class="button_like like" id="{{post.pk}}">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                            <p>Lang_post_like</p>
+                        </button>
+                    {% else %}
+                        <button class="button_like unlike" id="{{post.pk}}">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                            <p>Lang_post_like</p>
+                        </button>
+                    {% endif %}
+                </div>
+                <div>
+                    <i class="fa-solid fa-message"></i>
+                    <p>Lang_post_cmt</p>
+                </div>
+                <div>
+                    <i class="fa-brands fa-facebook-messenger"></i>
+                    <p>Lang_post_send</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_card" id="{{post.id}}">
+            <div class="input">
+                <div class="profile-picture">
+                    <img src="{{user.avatar.url}}">
+                </div>
+                <div class="input_cmt_post">
+                    <input class="input_cmt_form" id="{{post.id}}" type="text" placeholder="Write a comment...">
+                    <button class="btn submit_cmt_form" id="{{post.id}}">Lang_post_submitcmt</buton>
+                </div>
+            </div>
+            
+            <div class="cmt" id="{{post.id}}">
+                {% for comment in post.comment_set.all %}
+                    {% if comment.user == user %}
+                        <div class="cmt_item" id="{{comment.id}}">
+                            <div class="profile-picture">
+                                <img src="{{comment.user.avatar.url}}">
+                            </div>
+                            <div class="context">
+                                <strong>{{comment.user.full_name}}</strong>
+                                <p>{{comment.text}}</p>
+                            </div>
+                            <div class="edit">
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <div class="function">
+                                    <button class="remove_cmt_post" id="{{comment.id}}" data-id="{{post.id}}">Lang_post_remove_cmt</buton>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% for comment in post.comment_set.all %}
+                    {% if comment.user != user %}
+                        <div class="cmt_item" id="{{comment.id}}">
+                            <div class="profile-picture">
+                                <a href="{% url 'profile' comment.user.username %}"><img src="{{comment.user.avatar.url}}"></a>
+                            </div>
+                            <div class="context">
+                                <strong>{{comment.user.full_name}}</strong>
+                                <p>{{comment.text}}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+

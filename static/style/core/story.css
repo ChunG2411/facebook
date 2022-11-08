@@ -1,0 +1,144 @@
+main{
+    display: grid;
+    grid-template-columns: 25vw auto;
+    margin-left: 4.7rem;
+    position: relative;
+    height: 100vh;
+}
+/*======================list story=====================*/
+.list_story{
+    background: white;
+    padding: 1rem 0 0 0;
+    overflow-y: scroll;
+    height: 85vh;
+}
+.list_story .user .create{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    cursor: pointer;
+}
+.list_story .user .create:hover{
+    background: rgb(240, 240, 240);
+}
+.list_story .user .create i{
+    padding: 1rem;
+    font-size: 2rem;
+    background: rgb(219, 219, 219);
+    color: var(--color-primary);
+    border-radius: 50%;
+}
+.list_story .user .story-user{
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    height: 4.4rem;
+    cursor: pointer;
+}
+.list_story .user .story-user:hover{
+    background: rgb(240, 240, 240);
+}
+.list_story .user .story-user .profile-picture{
+    width: 4rem;
+}
+.list_story .user .story-user .name{
+    align-items: start;
+}
+
+/*======================story content=====================*/
+.story_content{
+    background: black;
+    color: white;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+.story_content .story_card{
+    height: 95vh;
+    width: 25rem;
+    background: rgb(27, 27, 27);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+.story_content .story_card .content{
+    display: none;
+    position: relative;
+}
+.story_content .story_card #create{
+    display: block;
+}
+.story_content .story_card .content .head{
+    display: flex;
+    position: fixed;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    top: 1rem;
+    width: 25rem;
+    z-index: 20;
+    align-items: center;
+}
+.story_content .story_card .content .head p{
+    text-shadow: 0 0 0.2rem rgb(54, 54, 54);
+}
+.story_content .story_card .content .head .delete{
+    margin-left: 10rem;
+    background: transparent;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+.story_content .story_card .content .img img{
+    width: 25rem;
+}
+.story_content .story_card #create .button_form_story{
+    position: fixed;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    bottom: 0;
+    left: 4.7rem;
+    width: 25vw;
+    height: max-content;
+    border-top: 0.1rem solid rgb(179, 177, 177);
+}
+.story_content .story_card #create button[type="submit"]{
+    width: 8rem;
+    padding: 0.2rem 1.5rem 0.2rem 1.5rem;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.story_content .story_card #create .clear{
+    width: 8rem;
+    padding: 0.2rem 1.5rem 0.2rem 1.5rem;
+    border-radius: 0.5rem;
+    background: gray;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.story_content .story_card #create label{
+    position: absolute;
+    left: 25%;
+    top: 40%;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: rgb(226, 226, 226);
+    color: black;
+    cursor: pointer;
+}
+.story_content .story_card #create img{
+    width: 25rem;
+}

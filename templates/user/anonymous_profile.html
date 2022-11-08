@@ -1,0 +1,228 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/user/anon_pf.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <!--====================head====================-->
+    <div class="head">
+
+        <!--===============background=================-->
+        <div class="background">
+            <div class="background-img">
+                <img src="{{user.background.url}}">
+            </div>
+        </div>
+
+        <!--=================avatar===============-->
+        <div class="avatar">
+            <div class="left">
+                <div class="profile-picture">
+                    <img src="{{user.avatar.url}}">
+                </div>
+                <div class="name">
+                    <h2>{{user.full_name}}</h2>
+                    <p>{{all_anon_friend.friend_count}} Lang_pf_friend</p>
+                </div>
+            </div>
+
+            <div class="right" id="{{user.username}}">
+                {% if is_friend %}
+                    <button class="friend remove">Lang_pf_unfriend</button>
+                    <button class="friend cancer" style="display:none;">Lang_pf_cancer</button>
+                    <button class="friend add" style="display:none;">Lang_pf_add</button>
+                    <button class="friend confirm" style="display:none;">Lang_pf_confirm</button>
+                    <button class="friend decline" style="display:none;">Lang_pf_decline</button>
+
+                {% else %}
+                    {% if sended %}
+                    <button class="friend remove" style="display:none;">Lang_pf_unfriend</button>
+                    <button class="friend cancer">Lang_pf_cancer</button>
+                    <button class="friend add" style="display:none;">Lang_pf_add</button>
+                    <button class="friend confirm" style="display:none;">Lang_pf_confirm</button>
+                    <button class="friend decline" style="display:none;">Lang_pf_decline</button>
+
+                    {% else %}
+                        {% if receive %}
+                        <button class="friend remove" style="display:none;">Lang_pf_unfriend</button>
+                        <button class="friend cancer" style="display:none;">Lang_pf_cancer</button>
+                        <button class="friend add" style="display:none;">Lang_pf_add</button>
+                        <button class="friend confirm">Lang_pf_confirm</button>
+                        <button class="friend decline">Lang_pf_decline</button>
+
+                        {% else %}
+                        <button class="friend remove" style="display:none;">Lang_pf_unfriend</button>
+                        <button class="friend cancer" style="display:none;">Lang_pf_cancer</button>
+                        <button class="friend add">Lang_pf_add</button>
+                        <button class="friend confirm" style="display:none;">Lang_pf_confirm</button>
+                        <button class="friend decline" style="display:none;">Lang_pf_decline</button>
+
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+                <button class="mess" data-id="{{user.username}}">Lang_pf_mess</button>
+            </div>
+        </div>
+    </div>
+
+    <!--=======================body======================-->
+    <div class="body">
+        <div class="body_card">
+            <!--================intro===========-->
+            <div class="left">
+                <div class="intro">
+                    <h3>Lang_pf_intro</h3>
+                    <p id="demo"></p>
+                    {% if user.biography %}
+                        <span><p>{{user.biography}}</p></span>
+                    {% endif %}
+
+                    {% if user.home_town %}
+                        <span><i class="fa-solid fa-house-chimney"></i><p>Lang_pf_live {{user.home_town}}</p></span>
+                    {% endif %}
+
+                    {% if user.phone_number %}
+                        <span><i class="fa-solid fa-phone"></i>{{user.phone_number}}</span>
+                    {% endif %}  
+                </div>
+            </div>
+
+            <!--=============feeds==============-->
+            <div class="feeds">
+                {% if user.post_count != 0 %}
+                    {% for post in user.post_set.all %}
+                        {% if post.status %}
+                        <div class="feed">
+
+                            <!--=========================head feed==========================-->
+                            <div class="head-feed">
+                                <div class="user">
+                                    <div class="profile-picture">
+                                        <img src="{{post.user.avatar.url}}">
+                                    </div>
+                                    <div class="name">
+                                        <h3>{{post.user.full_name}}</h3>
+                                        <small>{{post.create_on}}<i class="fa-solid fa-earth-americas"></i></small>       
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!--======================content========================-->
+                            <div class="caption">
+                                <p>{{post.caption}}</p>
+                                
+                            </div>
+
+                            {% if post.image %}
+                                <div class="feed-photo">
+                                    <img src="{{post.image.url}}">
+                                </div>
+                            {% endif %}
+                            
+                            <!--=========================action=============================-->
+                            <div class="action-button">
+                                <div class="interactive">
+
+                                    <div class="like_count" id="{{post.pk}}">
+                                        <span><i class="fa-solid fa-thumbs-up"></i></span>
+                                        <span class="post_like_count" id="{{post.pk}}">{{post.like_count}}</span>
+                                    </div>
+                                    
+                                    <div class="cmt_count">
+                                        <span class="post_cmt_count" id="{{post.pk}}">{{post.comment_count}} Lang_post_cmt_cnt</span>
+                                    </div>
+                                </div>
+
+                                <div class="button">
+                                    <div>
+                                        {% if post.pk in liked %}                            
+                                            <button class="button_like like" id="{{post.pk}}">
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                                <p>Lang_post_like</p>
+                                            </button>
+                                        {% else %}
+                                            <button class="button_like unlike" id="{{post.pk}}">
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                                <p>Lang_post_like</p>
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-message"></i>
+                                        <p>Lang_post_cmt</p>
+                                    </div>
+                                    <div><i class="fa-brands fa-facebook-messenger"></i>
+                                        <p>Lang_post_send</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--=========================Comment=============================-->
+                            <div class="comment_card" id="{{post.id}}">
+                                <div class="input">
+                                    <div class="profile-picture">
+                                        <img src="{{request.user.avatar.url}}">
+                                    </div>
+                                    <div class="input_cmt_post">
+                                        <input class="input_cmt_form" id="{{post.id}}" type="text" placeholder="Write a commnet...">
+                                        <button class="btn submit_cmt_form" id="{{post.id}}">Lang_post_submitcmt</buton>
+                                    </div>
+                                </div>
+                                
+                                <div class="cmt" id="{{post.id}}">
+                                    {% for comment in post.comment_set.all %}
+                                        {% if comment.user == request.user %}
+                                            <div class="cmt_item" id="{{comment.id}}">
+                                                <div class="profile-picture">
+                                                    <img src="{{comment.user.avatar.url}}">
+                                                </div>
+                                                <div class="context">
+                                                    <strong>{{comment.user.full_name}}</strong>
+                                                    <p>{{comment.text}}</p>
+                                                </div>
+                                                <div class="edit">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                    <div class="function">
+                                                        <button class="remove_cmt_post" id="{{comment.id}}" data-id="{{post.id}}">Lang_post_remove_cmt</buton>   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                    
+                                    {% for comment in post.comment_set.all %}
+                                        {% if comment.user != request.user %}
+                                            <div class="cmt_item" id="{{comment.id}}">
+                                                <div class="profile-picture">
+                                                    <a href="{% url 'profile' comment.user.username %}"><img src="{{comment.user.avatar.url}}"></a>
+                                                </div>
+                                                <div class="context">
+                                                    <strong>{{comment.user.full_name}}</strong>
+                                                    <p>{{comment.text}}</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/user/profile_anon.js' %}"></script>
+    <script src="{% static 'js/user/friend_socket.js' %}"></script>
+{% endblock %}

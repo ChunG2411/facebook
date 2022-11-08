@@ -1,0 +1,74 @@
+{% load static %}
+
+{% for friend in all_user %}
+<div class="chat_win" id="{{friend.username}}">
+
+    <div class="win_head">
+        <div class="profile-picture">
+            <a href="{% url 'profile' friend.username %}"><img src="{{friend.avatar.url}}"/></a>
+        </div>
+        <p style="font-weight:500;">{{friend.full_name}}</p>
+        <span class="close_win" id="{{friend.username}}"><i class="fa-solid fa-xmark"></i></span>
+    </div>
+ 
+    <div class="win_content" id="{{friend.username}}">
+        {% for message in all_chat %}
+
+            {% if message.to_user == friend %}
+            <div class="msg_container message_send">
+                <div class="msg-box">
+                    <p>
+                        {% if message.text %}
+                            {{message.text}}
+                        {% endif %}
+
+                        {% if message.image %}
+                            <img src="{{message.image.url}}">
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if message.user == friend %}
+            <div class="msg_container message_receive">
+                <div class="msg-box">
+                    <p>
+                        {% if message.text %}
+                            {{message.text}}
+                        {% endif %}
+                        {% if message.image %}
+                            <img src="{{message.image.url}}">
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+        {% endfor %}
+    </div>  
+
+    <div class="input">
+
+        <div class="image_upload" id="image_upload_{{friend.username}}">
+
+            <img class="store_image_upload" data-id="{{friend.username}}" id="image_upload_show_{{friend.username}}" src="{% static 'img/blue1.jpg' %}"/>
+            <label for="reset_{{friend.username}}" id="clear_photo_chat" data-id="image_upload_{{friend.username}}"><i class="fa-solid fa-xmark"></i></label>
+
+            <img id="background_chat" src="{% static 'img/blue1.jpg' %}" style="display:none;"/>
+        </div>
+
+        <div class="input_form">
+
+            <label id="input_photo_chat" data-id="image_upload_{{friend.username}}" for="image_chat_{{friend.username}}"><i class="fa-solid fa-image"></i></label>
+            <input class="input_image_chat" data-id="{{friend.username}}" id="image_chat_{{friend.username}}" name="image_chat" type="file" onchange="document.getElementById('image_upload_show_{{friend.username}}').src = window.URL.createObjectURL(this.files[0])" style="display:none;" ><br>
+            
+            <input class="input_text_chat" type="text" id="{{friend.username}}" placeholder="Aa">
+            <span><i class="fa-solid fa-thumbs-up"></i></span>
+
+            <input type="reset" id="reset_{{friend.username}}" style="display:none;">
+        </div>  
+    </div>
+</div>
+{% endfor %}
+

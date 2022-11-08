@@ -1,0 +1,437 @@
+/*========================main=======================*/
+main{
+    margin-left: 4rem;
+}
+/*===============head=================*/
+main .head{
+    display: grid;
+    place-items: center;
+    background: linear-gradient(transparent, rgb(255, 255, 255));
+    box-shadow: 0 0 0.2rem rgb(190, 190, 190);
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+/*==========background==========*/
+.head .background{
+    width: 80%;
+    max-width: 1000px;
+    min-width: 600px;
+    position: relative;
+}
+main .head .background-img{
+    aspect-ratio: 5 / 2;
+    overflow: hidden;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+main .head .background-img img{
+    height: 100%;
+}
+.head .background .dropdown{
+    position: absolute;
+    right: 3%;
+    top: 80%;
+    z-index: 10;
+    width: max-content;
+    background: white;
+}
+.background .dropdown .dropbtn{
+    display: flex;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background: white;
+}
+.background .dropdown .dropdown-content{
+    background: white;
+    width: 100%;
+    box-shadow: 0 0 0.2rem rgb(190, 190, 190);
+    font-size: 0.9rem;
+    display: none;
+}
+.background .dropdown .dropdown-content > div{
+    padding: 0.5rem;
+}
+.background .dropdown .dropdown-content > div:hover{
+    cursor: pointer;
+    background: rgb(238, 238, 238);
+}
+.background .dropdown .dropbtn:hover{
+    background: rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+/*==========avatar==========*/
+main .head .avatar{
+    width: 70%;
+    max-width: 800px;
+    min-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -3rem;
+    z-index: 20;
+}
+.head .avatar .left{
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 1rem;  
+}
+.head .avatar .profile-picture{
+    width: 12rem;
+    border: 0.25rem solid white;
+}
+.head .avatar .left i{
+    position: absolute;
+    background: rgb(224, 224, 224);
+    border-radius: 50%;
+    border: 0.5rem solid rgb(224, 223, 223);
+    font-size: 1.3rem;
+    left: 9rem;
+    top: 9rem;
+    z-index: 5;
+    cursor: pointer;    
+}
+.head .avatar .right{
+    margin-top: 8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.avatar .right button{
+    background: var(--color-primary);
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1rem;
+    height: max-content;
+    width: 8rem;
+    cursor: pointer;
+    color: white;
+    border-radius: 0.3rem;
+}
+
+/*=====================body=====================*/
+main .body{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    position: relative;
+}
+main .body .body_card{
+    display: flex;
+    gap: 1rem;
+    max-width: 1000px;
+    min-width: 500px;
+    gap: 1rem;
+    width: 75%;
+    position: relative;
+}
+
+/*================left===============*/
+.body .body_card .left{
+    width: 100%;
+}
+.body .body_card .left .intro{
+    padding: 0.8rem;
+    background: white;
+    box-shadow: 0 0 0.2rem rgb(190, 190, 190);
+    height: max-content;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+.body .body_card .left .intro > span{
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+    align-items: center;
+}
+
+.body .body_card .left .friends{
+    padding: 0.8rem;
+    background: white;
+    box-shadow: 0 0 0.2rem rgb(190, 190, 190);
+    max-height: 20rem;
+    border-radius: 0.5rem;
+}
+.body .body_card .left .friends h3{
+    margin-bottom: 1rem;
+}
+.body .body_card .left .friends .profile{
+    height: 15rem;
+    overflow-y: scroll;
+}
+.body .body_card .left .friends .profile > div{
+    display: flex;
+    gap: 0.7rem;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.body .body_card .left .friends .profile strong{
+    font-size: 0.85rem;
+}
+
+/*================feed================*/
+.feeds .feed{
+    box-shadow: 0 0 0.1rem gray;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    background: white;
+}
+.feed .head-feed{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem 1rem 0.7rem 1rem;
+}
+.feed .head-feed .user{
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    align-items: center;
+}
+.feed .head-feed .edit{
+    position: relative;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.feed .head-feed .edit .function{
+    position: absolute;
+    width: max-content;
+    background: white;
+    font-size: 1rem;
+    padding: 0.5rem;
+    right: 0;
+    bottom: -1.5rem;
+    box-shadow: 0 0 0.5rem rgb(190, 190, 190);
+    z-index: 10;
+    display: none;
+}
+.feed .head-feed .edit .function button{
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.feed .head-feed .edit:hover .function{
+    display: block;
+}
+.feed .caption{
+    font-size: 0.9rem;
+    padding: 0 1rem 0.7rem 1rem;
+    width: 100%;
+}
+.feed .feed-photo{
+    overflow: hidden;
+}
+.feed .action-button .interactive{
+    margin: 0.7rem 1rem 0.7rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid rgb(179, 177, 177);
+}
+.feed .action-button .interactive i{
+    font-size: 0.7rem;
+    background: var(--color-primary);
+    border: 0.2rem solid var(--color-primary);
+    border-radius: 50%;
+    color: white;
+    margin-right: 0.25rem;
+}
+.feed .action-button .button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-bottom: 0.5rem;
+}
+.feed .action-button .button>div{
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0.3rem 2rem 0.3rem 2rem;
+    cursor: pointer;
+}
+.feed .action-button .button>div i{
+    margin-right: 0.3rem;
+    font-size: 1.2rem;
+}
+.feed .action-button .button>div:hover{
+    background: rgb(221, 220, 220);
+    border-radius: 0.2rem;
+}
+.feed .action-button .button .like{
+    color: var(--color-primary);
+    display: flex;
+    background: transparent;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.feed .action-button .button .like i{
+    font-size: 1.4rem;
+}
+.feed .action-button .button .unlike i{
+    font-size: 1.4rem;
+}
+.feed .action-button .button .unlike{
+    color: gray;
+    display: flex;
+    background: transparent;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.feed .comment_card{
+    padding: 0rem 1rem 0rem 1rem;
+    height: max-content;
+}
+.feed .comment_card .input{
+    padding: 0.5rem 0 0.5rem 0;
+    border-top: 0.1rem solid rgb(179, 177, 177);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.feed .comment_card .input .profile-picture{
+    width: 3rem;
+}
+.feed .comment_card .input .input_cmt_post{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+}
+.feed .comment_card .input input{
+    background: rgb(231, 231, 231);
+    border-radius: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    width: 100%;
+    font-size: 1rem;
+}
+.feed .comment_card .input button{
+    padding: 0 0.7rem 0 0.7rem;
+    background: var(--color-primary);
+    color: white;
+    font-size: 1rem;
+    border-radius: 1rem;
+}
+.feed .comment_card .cmt{
+    overflow-y: scroll;
+    min-height: min-content;
+    max-height: 15rem;
+}
+.feed .comment_card .cmt>div {
+    display: flex;
+    height: max-content;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    padding-bottom: 0.7rem;
+}
+.feed .comment_card .cmt>div .context{
+    background: rgb(231, 231, 231);
+    border-radius: 0.75rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    width: max-content;
+    justify-content: start;
+}
+.cmt::-webkit-scrollbar{
+    width: 0rem;
+}
+.comment_card .cmt .edit{
+    position: relative;
+    cursor: pointer;
+}
+.comment_card .cmt .edit .function{
+    position: absolute;
+    width: max-content;
+    background: white;
+    font-size: 1rem;
+    padding: 0.5rem;
+    right: 0.5rem;
+    bottom: -1rem;
+    box-shadow: 0 0 0.5rem rgb(190, 190, 190);
+    display: none;
+}
+.comment_card .cmt .edit .function button{
+    background: transparent;
+}
+.comment_card .cmt .edit:hover .function{
+    display: block;
+}
+
+/*====================edit profile==================*/
+.edit-profile-card{
+    background: rgba(226, 226, 226, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: grid;
+    place-items: center;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.edit-profile-card .card_edit{
+    background: white;
+    width: 50rem;
+    padding: 1rem;
+    height: 100%;
+    overflow-y: scroll;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.2rem rgb(190, 190, 190);
+    text-align: center;
+    box-shadow: 0 0 0.5rem rgb(204, 204, 204);
+}
+.edit-profile-card .card_edit .edit-head{
+    border-bottom: 0.1rem solid rgb(197, 197, 197);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.edit-profile-card .card_edit .content{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    padding-top: 1rem;
+}
+.edit-profile-card .card_edit .content label{
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 15rem;
+}
+.edit-profile-card .card_edit button{
+    margin-top: 1rem;
+    border-radius: 0.3rem;
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.edit-profile-card .card_edit .content .field{
+    border: 0.1rem solid rgb(202, 201, 201);
+    width: 100%;
+}
+
+::-webkit-scrollbar{
+    width: 0.5rem;
+}
+::-webkit-scrollbar-track{
+    background: transparent !important;
+}
+::-webkit-scrollbar-thumb{
+    background: rgb(207, 207, 207);
+    border-radius: 0.3rem;
+}

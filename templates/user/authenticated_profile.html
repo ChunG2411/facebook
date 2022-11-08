@@ -1,0 +1,265 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/user/auth_pf.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <!--==================================head===================================-->
+    <div class="head">
+
+        <!--=========================background============================-->
+        <div class="background">
+            <div class="background-img">
+                <img src="{{user.background.url}}">
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <i class="fa-solid fa-camera"></i>
+                    <p>Lang_pf_edit</p>
+                </button>
+                <div class="dropdown-content">
+                    <div>
+                        <p>Lang_pf_upload</p>
+                    </div>
+                    <div>
+                        <p>Lang_pf_remove</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--===========================avatar==========================-->
+        <div class="avatar">
+            <div class="left">
+                <div class="profile-picture">
+                    <img src="{{user.avatar.url}}">
+                </div>
+                <label for=""><i class="fa-solid fa-camera"></i></label>
+                
+                <div class="name">
+                    <h2>{{user.full_name}}</h2>
+                    <p>{{all_friend.friend_count}} Lang_pf_friend</p>
+                </div>
+            </div>
+            <div class="right">
+                <a href="{% url 'story' %}"><button>Lang_story_create</button></a>
+                <a><button style="background:rgb(161, 161, 161);" class="edit-profile-button">Lang_pf_pfedit</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!--======================================body=====================================-->
+    <div class="body">
+        <div class="body_card">
+            <!--===========================left======================-->
+            <div class="left">
+
+                <div class="intro">
+                    <h3>Lang_pf_intro</h3>
+                    {% if user.biography %}
+                        <span><p style="white-space: pre-line">{{user.biography}}</p></span>
+                    {% endif %}
+
+                    {% if user.home_town %}
+                        <span><i class="fa-solid fa-house-chimney"></i><p>Lang_pf_live {{user.home_town}}</p></span>
+                    {% endif %}
+
+                    {% if user.phone_number %}
+                        <span><i class="fa-solid fa-phone"></i>{{user.phone_number}}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="friends">
+                    <h3>Lang_main_friend</h3>
+                    <div class="profile">
+                        {% for friend in all_friend.friends.all %}
+                        <div>
+                            <div class="profile-picture">
+                                <a href="{% url 'profile' friend.username %}"><img src="{{friend.avatar.url}}"></a>
+                            </div>
+                            <a href="{% url 'profile' friend.username %}"><strong style="color:black;">{{friend.full_name}}</strong></a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+            <!--===================================feeds==============================-->
+            <div class="feeds">
+
+                {% if user.post_count != 0 %}
+                    {% for post in user.post_set.all %}
+                        <div class="feed">
+
+                            <!--=========================head feed==========================-->
+                            <div class="head-feed">
+                                <div class="user">
+                                    <div class="profile-picture">
+                                        <img src="{{post.user.avatar.url}}">
+                                    </div>
+                                    <div class="name">
+                                        <h3>{{post.user.full_name}}</h3>
+                                        <small>{{post.create_on}}
+                                            {% if post.status %}
+                                                <i class="fa-solid fa-earth-americas"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-lock"></i>
+                                            {% endif %}
+                                        </small>       
+                                    </div>
+                                </div>
+
+                                <div class="edit">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                    <div class="function">
+                                        <form method="POST" action="{% url 'delete_post' post.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit">Lang_post_remove_post</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!--======================content========================-->
+                            <div class="caption">
+                                <p>{{post.caption}}</p>
+                            </div>
+
+                            {% if post.image %}
+                                <div class="feed-photo">
+                                    <img src="{{post.image.url}}">
+                                </div>
+                            {% endif %}
+                            
+                            <!--=========================action=============================-->
+                            <div class="action-button">
+                                <div class="interactive">
+
+                                    <div class="like_count" id="{{post.pk}}">
+                                        <span><i class="fa-solid fa-thumbs-up"></i></span>
+                                        <span class="post_like_count" id="{{post.pk}}">{{post.like_count}}</span>
+                                    </div>
+                                    
+                                    <div class="cmt_count">
+                                        <span class="post_cmt_count" id="{{post.pk}}">{{post.comment_count}} Lang_post_cmt_cnt</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="button">
+                                    <div>
+                                        {% if post.pk in liked %}                            
+                                            <button class="button_like like" id="{{post.pk}}">
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                                <p>Lang_post_like</p>
+                                            </button>
+                                        {% else %}
+                                            <button class="button_like unlike" id="{{post.pk}}">
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                                <p>Lang_post_like</p>
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-message"></i>
+                                        <p>Lang_post_cmt</p>
+                                    </div>
+                                    <div><i class="fa-brands fa-facebook-messenger"></i>
+                                        <p>Lang_post_send</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--=========================Comment=============================-->
+                            <div class="comment_card" id="{{post.id}}">
+                                <div class="input">
+                                    <div class="profile-picture">
+                                        <img src="{{user.avatar.url}}">
+                                    </div>
+                                    <div class="input_cmt_post">
+                                        <input class="input_cmt_form" id="{{post.id}}" type="text" placeholder="Write a commnet...">
+                                        <button class="btn submit_cmt_form" id="{{post.id}}">Lang_post_submitcmt</buton>
+                                    </div>
+                                </div>
+                                
+                                <div class="cmt" id="{{post.id}}">
+                                    {% for comment in post.comment_set.all %}
+                                        {% if comment.user == request.user %}
+                                            <div class="cmt_item" id="{{comment.id}}">
+                                                <div class="profile-picture">
+                                                    <img src="{{comment.user.avatar.url}}">
+                                                </div>
+                                                <div class="context">
+                                                    <strong>{{comment.user.full_name}}</strong>
+                                                    <p>{{comment.text}}</p>
+                                                </div>
+                                                <div class="edit">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                    <div class="function">
+                                                        <button class="remove_cmt_post" id="{{comment.id}}" data-id="{{post.id}}">Lang_post_remove_cmt</buton>   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                    
+                                    {% for comment in post.comment_set.all %}
+                                        {% if comment.user != user %}
+                                            <div class="cmt_item" id="{{comment.id}}">
+                                                <div class="profile-picture">
+                                                    <a href="{% url 'profile' comment.user.username %}"><img src="{{comment.user.avatar.url}}"></a>
+                                                </div>
+                                                <div class="context">
+                                                    <strong>{{comment.user.full_name}}</strong>
+                                                    <p>{{comment.text}}</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <!--============================edit profile=============================-->
+    <div class="edit-profile-card">
+        <div class="card_edit">
+            <form method="POST" action="{% url 'edit_profile' user.username %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="edit-head">
+                    <h2>Lang_pf_pfedit</h2>
+                </div>
+                {% for field in edit_form %}
+                    <div class="content">
+                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                        <div class="field">
+                            {{ field }}
+                        </div>
+                        <small id="passwordHelpBlock">{{ field.help_text }}</small>
+                        <div class="error">
+                            {{ field.errors }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <button type="submit">Lang_pf_submit</button>
+
+            </form>
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/user/profile_auth.js' %}"></script>
+{% endblock %}

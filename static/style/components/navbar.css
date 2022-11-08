@@ -1,0 +1,369 @@
+/*===================navbar=========================*/
+nav{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    padding: 0.8rem;
+    background: white;
+    z-index: 50;
+    border-right: 0.1rem solid rgb(194, 192, 192);
+}
+.navbar .menu-item p{
+    position: absolute;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 0.5rem;
+    left: 3.8rem;
+    display: none;
+}
+.navbar i{
+    font-size: 1.35rem;
+}
+.navbar .profile{
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 0.8rem;
+}
+.profile .profile-picture{
+    width: 2.7rem;
+    margin-left: 0.3rem;
+}
+.profile i{
+    position: absolute;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    background: white;    
+    border-radius: 50%;
+    border-color: white;
+    border: 0.1rem solid white;
+    right: 0;
+    bottom: 0;
+}
+.navbar .menu-item{
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    height: 3rem;
+    transition: all 300ms ease;
+    position: relative;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+.navbar .menu-item i{
+    margin-left: 0.3rem;
+    color: black;
+    text-decoration: none;
+}
+.navbar .other{
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 0;
+    background: rgb(230, 228, 228);
+}
+.navbar .other i{
+    color: var(--color-primary);
+}
+.navbar .menu-item:hover{
+    background: rgb(214, 214, 214);
+    border-radius: 0.5rem;
+}
+.navbar .menu-item i:hover~p{
+    display: block;
+}
+.navbar .menu-item:nth-child(6){
+    color: black;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.navbar .menu-item:last-child{
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+/*================count=============*/
+.navbar .count{
+    position: absolute;
+    padding: 0.3rem;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    top: 0.4rem;
+    right: 0.4rem;
+}
+/*===============active=============*/
+.navbar .active i{
+    color: var(--color-primary);
+}
+.navbar .active::before{
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 80%;
+    position: absolute;
+    background: var(--color-primary);
+    left: -1rem;
+    border-radius: 1rem;
+}
+
+/*========================popup========================*/
+nav .popup{
+    position: absolute;
+    width: 23rem;
+    background: white;
+    padding: 1.3rem 0.8rem 0.8rem 0.8rem;
+    top: 0;
+    left: 4.65rem;
+    border-left: 0.1rem solid rgb(194, 192, 192);
+    display: none;
+    z-index: 50;
+    box-shadow: 0 0 0.2rem rgb(168, 168, 168);
+}
+
+/*===========profile=============*/
+.popup .profile-popup{
+    display: none;
+    height: max-content;
+}
+.popup .profile-popup .profile-tab{
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem rgb(168, 168, 168);
+    margin-bottom: 1rem;
+}
+
+.popup .profile-popup .option-tab >div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem;
+    position: relative;
+}
+.popup .profile-popup .option-tab >div:hover{
+    background: rgb(233, 233, 233);
+    border-radius: 0.5rem;
+}
+.popup .profile-popup .option-tab .select_lang{
+    background: white;
+    position: absolute;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 0.25rem rgb(168, 168, 168);
+    top: 100%;
+    left: 50%;
+    z-index: 60;
+    display: none;
+}
+.popup .profile-popup .option-tab .select_lang > p{
+    cursor: pointer;
+    padding: 0.2rem;
+    font-size: 0.9rem;
+}
+.popup .profile-popup .option-tab .select_lang > p:hover{
+    background: rgb(233, 233, 233);
+}
+
+/*===========search=============*/
+.popup .search-popup{
+    display: none;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.search-popup::-webkit-scrollbar{
+    width: 0rem;
+}
+.popup .search-popup h2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popup .search-popup h2 i{
+    background: rgb(233, 233, 233);
+    border-radius: 50%;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    cursor: pointer;
+}
+.popup .search-popup .search-bar{
+    background: rgb(226, 224, 224);
+    padding: 0.4rem;
+    border-radius: 2rem;
+    width: 100%;
+    margin-top: 0.8rem;
+}
+.popup .search-popup .search-bar input[type="text"]{
+    background: transparent;
+    margin-left: 0.5rem;
+    width: 80%;
+}
+.search-bar i{
+    margin-left: 0.5rem;
+    color: rgb(145, 145, 145);
+}
+.search-popup h4{
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+.search-popup .recent > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    height: 3rem;
+}
+.recent .search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgb(49, 49, 49);
+}
+.recent .search i{
+    background: rgb(214, 212, 212);
+    padding: 0.65rem;
+    border-radius: 50%;
+    color: rgb(129, 129, 129);
+}
+.recent .search p{
+    font-size: 0.9rem;
+}
+.search-popup .recent > div:hover{
+    background: rgb(206, 205, 205);
+    border-radius: 0.3rem;
+}
+.recent > div .fa-thin{
+    margin-right: 0.5rem;
+    color: rgb(110, 110, 110);
+}
+.recent > div .fa-thin:hover{
+    margin-right: 0.2rem;
+    background: rgb(182, 181, 181);
+    padding: 0.3rem;
+    border-radius: 50%;
+}
+
+/*===========notifications=============*/
+.popup .notifications-popup{
+    display: none;
+    overflow-y: scroll;
+    height: 100vh;
+}
+.notifications-popup::-webkit-scrollbar{
+    width: 0rem;
+}
+.popup .notifications-popup h2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popup .notifications-popup h2 i{
+    background: rgb(233, 233, 233);
+    border-radius: 50%;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    cursor: pointer;
+}
+.popup .notifications-popup h4{
+    margin-bottom: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+.notifications-popup .content > div{
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    display: flex;
+    margin-bottom: 1rem;
+}
+.notifications-popup .content > div:hover{
+    background: rgb(231, 231, 231);
+    border-radius: 0.5rem;
+}
+.notifications-popup .content .profile-picture{
+    width: 3.5rem;
+    height: max-content;
+}
+.notifications-popup .content .body-content{
+    overflow: hidden;
+    align-items: start;
+    margin-left: 0.5rem;
+}
+.notifications-popup .content .body-content small{
+    display: block;
+}
+.notifications-popup .content .action{
+    align-items: center;
+    margin-top: 1rem;
+    display: flex;
+}
+.notifications-popup .content .action .confirm{ 
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    background: var(--color-primary);
+    color: white;
+}
+.notifications-popup .content .action .decline{ 
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    background: var(--color-primary);
+    background: rgb(199, 199, 199) ;
+    margin-left: 2rem;
+}
+
+/*==============chats=================*/
+.popup .chats-popup{
+    display: none;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.chats-popup::-webkit-scrollbar{
+    width: 0rem;
+}
+.popup .chats-popup h2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popup .chats-popup h2 i{
+    background: rgb(233, 233, 233);
+    border-radius: 50%;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    cursor: pointer;
+}
+.popup .chats-popup .search-bar{
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: rgb(226, 224, 224);
+    border-radius: 2rem;
+}
+.popup .chats-popup .search-bar input{
+    background: transparent;
+    margin-left: 0.5rem;
+    width: 80%;
+}
+.chats-popup .chat > div{
+    display: flex;
+    padding: 0.7rem 0 0.7rem 0;
+}
+.chats-popup .chat > div:hover{
+    background: rgb(231, 231, 231);
+    border-radius: 0.5rem;
+}
+.chats-popup .profile-picture{
+    margin-left: 0.5rem;
+    width: 3.5rem;
+    height: max-content;
+}
+.chats-popup .content{
+    align-items: start;
+    margin-left: 0.8rem;
+}
+.chats-popup .content p{
+    font-size: 0.85rem;
+}
+

@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/core/friend.css' %}">
+{% endblock %}
+
+{% block content %}
+<friend>
+    <div class="tab_head">
+        <div class="tab active" id="receive">
+            <p>Lang_friend_receive</p>
+        </div>
+        <div class="tab" id="send">
+            <p>Lang_friend_send</p>
+        </div>
+        <div class="tab" id="friend">
+            <p>Lang_friend_friend</p>
+        </div>
+    </div>
+    <div class="content_tab">
+        <div class="content_receive">
+            {% if receive_friend_request %}
+                {% for receive in receive_friend_request %}
+                <div>
+                    <div class="profile-picture">
+                        <a href="{% url 'profile' receive.sender.username %}"><img src="{{receive.sender.avatar.url}}"></a>
+                    </div>
+                    <a href="{% url 'profile' receive.sender.username %}"><strong style="color:black;">{{receive.sender.full_name}}</strong></a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="content_send">
+            {% if send_friend_request %}
+                {% for send in send_friend_request %}
+                <div>
+                    <div class="profile-picture">
+                        <a href="{% url 'profile' send.receiver.username %}"><img src="{{send.receiver.avatar.url}}"></a>
+                    </div>
+                    <a href="{% url 'profile' send.receiver.username %}"><strong style="color:black;">{{send.receiver.full_name}}</strong></a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="content_friend">
+            {% if all_friend.friends.all %}
+                {% for friend in all_friend.friends.all %}
+                <div>
+                    <div class="profile-picture">
+                        <a href="{% url 'profile' friend.username %}"><img src="{{friend.avatar.url}}"></a>
+                    </div>
+                    <a href="{% url 'profile' friend.username %}"><strong style="color:black;">{{friend.full_name}}</strong></a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</friend>
+{% endblock %}
+
+{% block extra_body %}
+    <script src="{% static 'js/components/navbar_fr.js' %}"></script>
+    <script src="{% static 'js/core/friend.js' %}"></script>
+{% endblock %}

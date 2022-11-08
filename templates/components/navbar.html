@@ -1,0 +1,238 @@
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/components/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'style/components/chat.css' %}">
+{% endblock %}
+
+<nav>
+    <!--================menu===================-->
+    <div class="navbar" id="{{request.user.username}}">
+        <div class="profile" id="profile">
+            <div class="profile-picture">
+                <img src="{{ request.user.avatar.url }}">
+            </div>
+            <i class="fa-brands fa-facebook"></i>
+        </div>
+
+        <div class="menu-item active">  
+            <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+            <p>Lang_navbar_home</p>
+        </div>
+
+        <div class="menu-item" id="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <p>Lang_navbar_search</p>
+        </div>
+
+        <div class="menu-item" id="notifications">
+            <i class="fa-solid fa-bell"></i>
+            {% if all_noti_not_read %}
+                <small style="display:inline;" class="count" id="{{request.user.username}}"></small>
+            {% else %}
+                <small style="display:none;" class="count" id="{{request.user.username}}"></small>
+            {% endif %}
+            <p>Lang_navbar_noti</p>
+        </div>
+
+        <div class="menu-item" id="messenger">
+            <i class="fa-brands fa-facebook-messenger"></i>
+            {% if all_chat_not_read %}
+                <small class="count" style="display:inline;" id="{{request.user.username}}"></small>
+            {% else %}
+                <small class="count" style="display:none;" id="{{request.user.username}}"></small>
+            {% endif %}
+            <p>Lang_navbar_mess</p>
+        </div>
+
+        <div class="menu-item other">
+            <i class="fa-solid fa-bars"></i>
+            <p>Lang_navbar_menu</p>
+        </div>
+
+        <div class="menu-item other" id="friends">
+            <a href="{% url 'friend' %}"><i id="friend" class="fa-solid fa-user-group"></i></a>
+            <p>Lang_navbar_friend</p>
+        </div>
+
+        <div class="menu-item other" id="watch">
+            <i class="fa-brands fa-youtube"></i>
+            <p>Lang_navbar_watch</p>
+        </div>
+
+        <div class="menu-item other" id="group">
+            <i class="fa-solid fa-users-viewfinder"></i>
+            <p>Lang_navbar_group</p>
+        </div>
+
+        <div class="menu-item other" id="game">
+            <i class="fa-solid fa-gamepad"></i>
+            <p>Lang_navbar_game</p>
+        </div>
+    </div>
+
+    <!--================popup====================-->
+    <div class="popup" id="popup">
+        <!--===========profile===========-->
+        <div class="profile-popup">
+            <div class="profile-tab">
+                <div class="profile-picture">
+                    <a href="{% url 'profile' request.user.username %}"><img src="{{request.user.avatar.url}}"></a>
+                </div>
+                <a href="{% url 'profile' request.user.username %}"><strong style="color: black;">{{request.user.full_name}}</strong></a>
+            </div>
+            <div class="option-tab">
+                <div>
+                    <i class="fa-sharp fa-solid fa-gear"></i>
+                    <p>Lang_navbar_pop_set</p>
+                </div>
+                <div id="language">
+                    <i class="fa-solid fa-language"></i>
+                    <p>Lang_navbar_pop_lang</P>
+
+                    <div class="select_lang">
+                        <p class="lang_select" id="english">English</p>
+                        <p class="lang_select" id="vietnamese">Vietnamese</p>
+                        <p class="lang_select" id="chinese">Chinese</p>
+                    </div>
+                </div>
+                <div>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="{% url 'logout' %}"><p style="color: black;">Lang_navbar_pop_logout</p></a>
+                </div>
+            </div>
+        </div>
+
+        <!--===========search===========-->
+        <div class="search-popup">
+            <h2>Lang_navbar_pop_search <i class="fa-solid fa-xmark" id="exit-search"></i></h2>
+
+            
+            <div class="search-bar">
+                <form method="GET" action="{% url 'search' %}" enctype="multipart/form-data">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="query" placeholder="Search Facebook" value="" autocapitalize="none">
+                </form>
+            </div>
+            
+
+            <h4>Lang_navbar_pop_recent</h4>
+            <div class="recent">
+                {% for recent in recent_display %}
+                    {% if recent != None %}
+                        <div>
+                            <div class="search">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <a href="/search/?query={{recent}}"><p style="color:black;">{{recent}}</p></a>
+                            </div>
+                            <i class="fa-thin fa-x"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!--===========notifications===========-->
+        <div class="notifications-popup">
+            <h2>Lang_navbar_pop_noti<i class="fa-solid fa-xmark" id="exit-noti"></i></h2>
+            <h4>Lang_navbar_pop_early</h4>
+            <div class="content">
+
+                {% for noti in all_noti %}
+                    {% if noti.user != request.user %}
+                    {% if noti.status %}
+                        {% if noti.content != 2 %}
+                        <div>
+                            <div class="profile-picture">
+                                <img src="{{ noti.user.avatar.url }}">
+                            </div>
+                            <div class="body-content">
+                                <p><b>{{ noti.user.full_name }}</b> {{ noti.get_content_display }} </p>
+                                <small id="create_on">{{ noti.create_on }}</small>
+                            </div>
+                        </div>
+
+                        {% else %}
+                            <div class="noti_friend" id="{{noti.user.username}}">
+                                <div class="profile-picture">
+                                    <img src="{{noti.user.avatar.url}}">
+                                </div>
+                                <div class="body-content">
+                                    <p><b>{{noti.user.full_name}}</b> {{ noti.get_content_display }}</p>
+                                    <small id="create_on">{{ noti.create_on }}</small>
+
+                                    <div class="action">
+                                        <button class="btn confirm" id="{{noti.user.username}}">Lang_navbar_pop_confirm</button>
+                                        <button class="btn decline" id="{{noti.user.username}}">Lang_navbar_pop_decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {% if noti.content != 2 %}
+                        <div style="background:rgb(231, 231, 231);">
+                            <div class="profile-picture">
+                                <img src="{{ noti.user.avatar.url }}">
+                            </div>
+                            <div class="body-content">
+                                <p><b>{{ noti.user.full_name }}</b> {{ noti.get_content_display }} </p>
+                                <small id="create_on">{{ noti.create_on }}</small>
+                            </div>
+                        </div>
+
+                        {% else %}
+                            <div class="noti_friend" id="{{noti.user.username}}" style="background:rgb(231, 231, 231);">
+                                <div class="profile-picture">
+                                    <img src="{{noti.user.avatar.url}}">
+                                </div>
+                                <div class="body-content">
+                                    <p><b>{{noti.user.full_name}}</b> {{ noti.get_content_display }}</p>
+                                    <small id="create_on">{{ noti.create_on }}</small>
+
+                                    <div class="action">
+                                        <button class="btn confirm" id="{{noti.user.username}}">Lang_pf_confirm</button>
+                                        <button class="btn decline" id="{{noti.user.username}}">Lang_pf_decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <!--==============chats==============-->
+        <div class="chats-popup">
+
+            <h2>Lang_navbar_mess<i class="fa-solid fa-xmark" id="exit-chat"></i></h2>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search messenger" id="messenger-search">
+            </div>
+            <div class="chat">
+                    {% for item_chat in all_chat_navbar %}
+                    {% if item_chat != request.user %}
+                        <div class="message" data-id="{{item_chat.username}}" style="cursor:pointer;">
+                            <div class="profile-picture">
+                                <img src="{{item_chat.avatar.url}}">
+                            </div>
+                            <div class="content">
+                                <h4>{{item_chat.full_name}}</h4>
+                                {% if item_chat in all_chat_not_read %}
+                                    <small class="display_new-mess"><b>Lang_navbar_pop_new</b></small>
+                                {% else %}
+                                    <small class="display_new-mess">Lang_navbar_pop_select {{item_chat.full_name}}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!--===================Chat win===========================-->
+    {% include 'components/chat.html' %}
+</nav>

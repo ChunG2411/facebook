@@ -1,0 +1,37 @@
+main{
+    margin: 1rem 2rem 1rem 30rem;
+    display: grid;
+    place-items: center;
+}
+
+.search-card .search-user-card{
+    background: white;
+    padding: 1rem;
+    min-width: 360px;
+    max-width: 750px;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem solid gray;
+    margin-bottom: 1rem;
+}
+.search-card .search-user-card > div {
+    display: flex;
+    gap: 2rem;
+    padding: 0.7rem;
+    align-items: center;
+}
+.search-card .search-user-card > div:hover{
+    background: rgb(230, 228, 228);
+    border-radius: 1rem;
+}
+.search-card .search-user-card > div .profile-picture{
+    width: 4rem;
+}
+
+.search-card .search-post-card > div{
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem solid gray;
+    margin-bottom: 1rem;
+    min-width: 360px;
+    max-width: 750px;
+}

@@ -1,0 +1,72 @@
+friend{
+    margin-left: 4.7rem;
+    margin-top: 0.5rem;
+    display: grid;
+    place-items: center;
+}
+.tab_head{
+    width: 80%;
+    max-width: 1000px;
+    min-width: 500px;
+    display: flex;
+    background: white;
+    border-radius: 0.5rem;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    height: max-content;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+.tab_head > div{
+    padding: 0 0.5rem 0 0.5rem;
+    cursor: pointer;
+    position: relative;
+}
+.tab_head .active{
+    color: var(--color-primary);
+}
+.tab_head .active::before{
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -0.2rem;
+    width: 80%;
+    height: 0.2rem;
+    background: var(--color-primary);
+    z-index: 10;
+}
+
+.content_tab{
+    width: 80%;
+    height: max-content;
+    max-width: 1000px;
+    min-width: 500px;
+    background: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.content_tab > div{
+    column-count: 2;
+    column-gap: 2rem;
+}
+.content_tab >div >div{
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.content_tab .profile-picture{
+    width: 3.5rem;
+}
+.content_tab > div >div:hover{
+    background: rgb(231, 231, 231);
+    border-radius: 0.5rem;
+}
+.content_send{
+    display: none;
+}
+.content_friend{
+    display: none;
+}

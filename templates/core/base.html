@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="{% static 'style/core/base.css' %}">
+    {% block extra_head %}{% endblock %}
+
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+
+    {% block content %}{% endblock %}
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js" 
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+                    crossorigin="anonymous"></script>
+    <script src="{% static 'js/components/chat.js' %}"></script>
+    
+    <script src="{% static 'js/authentication/websocket.js' %}"></script>
+    <script src="{% static 'js/components/interact_socket.js' %}"></script>
+    <script src="{% static 'js/components/noti_socket.js' %}"></script>
+
+    <script type="module" src="{% static 'languages/lang.js' %}"></script>
+
+    {% block extra_body %}{% endblock %}
+
+</body>
+</html>
